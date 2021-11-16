@@ -1,0 +1,163 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/water_drop_no_anim.png" type="Texture" id=2]
+[ext_resource path="res://assets/bucket_no_anim.png" type="Texture" id=3]
+[ext_resource path="res://src/main_menu.gd" type="Script" id=4]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+color = Color( 0.870588, 0.113725, 0.113725, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 56.0
+margin_top = 54.0
+margin_right = 264.0
+margin_bottom = 125.0
+
+[node name="Play" type="HBoxContainer" parent="CenterContainer/Buttons"]
+margin_right = 208.0
+margin_bottom = 21.0
+
+[node name="Play" type="Button" parent="CenterContainer/Buttons/Play"]
+margin_right = 94.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 94, 0 )
+action_mode = 0
+text = "Play!"
+
+[node name="Difficulty" type="OptionButton" parent="CenterContainer/Buttons/Play"]
+margin_left = 98.0
+margin_right = 208.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 110, 0 )
+text = "Normal"
+align = 1
+items = [ "Easy", null, false, 0, null, "Normal", null, false, 1, null, "Hard", null, false, 2, null, "Impossible", null, false, 3, null ]
+selected = 1
+
+[node name="Settings" type="HBoxContainer" parent="CenterContainer/Buttons"]
+margin_top = 25.0
+margin_right = 208.0
+margin_bottom = 46.0
+
+[node name="Scores" type="Button" parent="CenterContainer/Buttons/Settings"]
+margin_right = 94.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 94, 0 )
+action_mode = 0
+text = "My Scores"
+
+[node name="Volume" type="HSlider" parent="CenterContainer/Buttons/Settings"]
+margin_left = 98.0
+margin_right = 142.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 44, 0 )
+value = 15.0
+
+[node name="UseVFX" type="Label" parent="CenterContainer/Buttons/Settings"]
+margin_left = 146.0
+margin_top = 2.0
+margin_right = 184.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 38, 0 )
+text = "VFX?"
+align = 2
+
+[node name="Enabled" type="CheckBox" parent="CenterContainer/Buttons/Settings"]
+margin_left = 188.0
+margin_right = 208.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 20, 0 )
+pressed = true
+
+[node name="Quit" type="Button" parent="CenterContainer/Buttons"]
+margin_top = 50.0
+margin_right = 208.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 94, 0 )
+action_mode = 0
+text = "Quit Game"
+
+[node name="Drop" type="TextureRect" parent="."]
+margin_left = 1.26167
+margin_top = 15.6464
+margin_right = 17.2617
+margin_bottom = 31.6464
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Drop2" type="TextureRect" parent="."]
+margin_left = 20.7071
+margin_top = 41.4558
+margin_right = 36.7071
+margin_bottom = 57.4558
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Drop3" type="TextureRect" parent="."]
+margin_left = 27.7782
+margin_top = 7.16116
+margin_right = 43.7782
+margin_bottom = 23.1612
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bucket" type="TextureRect" parent="."]
+margin_left = -0.152542
+margin_top = 116.409
+margin_right = 15.8475
+margin_bottom = 132.409
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Button" parent="."]
+margin_left = 256.332
+margin_top = 157.14
+margin_right = 318.332
+margin_bottom = 178.14
+action_mode = 0
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="CenterContainer/Buttons/Play/Play" to="." method="_on_Play_pressed"]
+[connection signal="item_selected" from="CenterContainer/Buttons/Play/Difficulty" to="." method="_on_Difficulty_item_selected"]
+[connection signal="pressed" from="CenterContainer/Buttons/Settings/Scores" to="." method="_on_Scores_pressed"]
+[connection signal="value_changed" from="CenterContainer/Buttons/Settings/Volume" to="." method="_on_Volume_value_changed"]
+[connection signal="pressed" from="CenterContainer/Buttons/Settings/Enabled" to="." method="_on_Enabled_pressed"]
+[connection signal="pressed" from="CenterContainer/Buttons/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]

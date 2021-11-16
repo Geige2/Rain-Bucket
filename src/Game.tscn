@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/background.png" type="Texture" id=1]
+[ext_resource path="res://src/drop_despawner.gd" type="Script" id=2]
+[ext_resource path="res://src/game.gd" type="Script" id=3]
+[ext_resource path="res://src/Bucket.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/GUI.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 rain_color : hint_color;
+uniform float wind;
+uniform float fall_speed;
+uniform bool enabled = true;
+
+
+float rand(vec2 coord) {
+	mod(coord, 100.0);
+    return fract(sin(dot(coord, vec2(12.9898,78.233))) * 43758.5453);
+}
+
+
+void fragment () {
+	if (enabled) {
+		vec2 coord = floor(UV * 70.0) / 2.0;
+		coord.y -= round(TIME * 30.0) * fall_speed;
+		coord.x += round(TIME * 30.0) * wind;
+		
+		float value = rand(coord) * 0.7;
+		if (value > 0.6) {
+			COLOR = rain_color;
+		}
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/rain_color = Color( 0.34902, 0.607843, 1, 1 )
+shader_param/wind = 0.0
+shader_param/fall_speed = 0.5
+shader_param/enabled = true
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Rain" type="Sprite" parent="."]
+modulate = Color( 0.619608, 0.772549, 1, 1 )
+material = SubResource( 3 )
+scale = Vector2( 20, 12 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 5 )]
+
+[node name="background" type="Sprite" parent="."]
+modulate = Color( 0.870588, 0.113725, 0.113725, 1 )
+scale = Vector2( 20, 1.375 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="DropDespawner" type="Area2D" parent="."]
+position = Vector2( 160, 200 )
+scale = Vector2( 16, 1 )
+monitorable = false
+collision_layer = 0
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropDespawner"]
+shape = SubResource( 1 )
+
+[node name="Bucket" parent="." instance=ExtResource( 4 )]
+position = Vector2( 33.1337, 142.87 )
+
+[connection signal="body_entered" from="DropDespawner" to="." method="_on_DropDespawner_body_entered"]
+[connection signal="body_entered" from="DropDespawner" to="DropDespawner" method="_on_DropDespawner_body_entered"]
+[connection signal="collected_changed" from="Bucket" to="." method="_on_Bucket_collected_changed"]

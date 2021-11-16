@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/water_drop_no_anim.png" type="Texture" id=2]
+[ext_resource path="res://assets/bucket_no_anim.png" type="Texture" id=3]
+[ext_resource path="res://src/scores.gd" type="Script" id=4]
+
+[node name="Scores" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+color = Color( 0.870588, 0.113725, 0.113725, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 105.0
+margin_top = 25.0
+margin_right = 215.0
+margin_bottom = 155.0
+
+[node name="Difficulty" type="OptionButton" parent="CenterContainer/Buttons"]
+margin_right = 110.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 110, 0 )
+text = "Normal"
+align = 1
+items = [ "Easy", null, false, 0, null, "Normal", null, false, 1, null, "Hard", null, false, 2, null, "Impossible", null, false, 3, null ]
+selected = 1
+
+[node name="Scores" type="ItemList" parent="CenterContainer/Buttons"]
+margin_top = 25.0
+margin_right = 110.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 0, 80 )
+same_column_width = true
+
+[node name="Exit" type="Button" parent="CenterContainer/Buttons"]
+margin_top = 109.0
+margin_right = 110.0
+margin_bottom = 130.0
+action_mode = 0
+text = "Main Menu"
+
+[node name="Drop" type="TextureRect" parent="."]
+margin_left = 1.26167
+margin_top = 15.6464
+margin_right = 17.2617
+margin_bottom = 31.6464
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Drop2" type="TextureRect" parent="."]
+margin_left = 20.7071
+margin_top = 41.4558
+margin_right = 36.7071
+margin_bottom = 57.4558
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Drop3" type="TextureRect" parent="."]
+margin_left = 27.7782
+margin_top = 7.16116
+margin_right = 43.7782
+margin_bottom = 23.1612
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bucket" type="TextureRect" parent="."]
+margin_left = -0.152542
+margin_top = 116.409
+margin_right = 15.8475
+margin_bottom = 132.409
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_selected" from="CenterContainer/Buttons/Difficulty" to="." method="_on_Difficulty_item_selected"]
+[connection signal="pressed" from="CenterContainer/Buttons/Exit" to="." method="_on_Exit_pressed"]

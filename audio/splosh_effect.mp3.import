@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/splosh_effect.mp3-5059baa268dd0339c39a4fe9e66a7291.mp3str"
+
+[deps]
+
+source_file="res://audio/splosh_effect.mp3"
+dest_files=[ "res://.import/splosh_effect.mp3-5059baa268dd0339c39a4fe9e66a7291.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
