@@ -10,6 +10,7 @@ signal vfx_pressed
 
 onready var volume_slider = $CenterContainer/Buttons/Settings/Volume
 onready var use_vfx_enabled = $CenterContainer/Buttons/Settings/Enabled
+onready var difficulty_level = $CenterContainer/Buttons/Play/Difficulty
 onready var guide = $GuideElements
 
 
@@ -19,6 +20,10 @@ func set_volume_slider(value: float) -> void:
 
 func set_vfx_enabled(value: bool) -> void:
 	use_vfx_enabled.pressed = value
+
+
+func set_difficulty_level(value: int) -> void:
+	difficulty_level.selected = value - 1
 
 
 func show_guide() -> void:

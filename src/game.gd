@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		
 		time_since_last_drop = 0
 		if time_between_drops >= 0.8 / difficulty_level:
-			time_between_drops -= 0.006 * time_between_drops * difficulty_level
+			time_between_drops -= 0.004 * time_between_drops * difficulty_level
 	
 	if time_since_last_regen >= time_between_regens:
 		self.health += 1

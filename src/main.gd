@@ -91,6 +91,7 @@ func switch_to_main_menu() -> void:
 	switch_to_scene(MAIN_MENU)
 	current_scene.set_volume_slider(volume * 5)
 	current_scene.set_vfx_enabled(vfx_enabled)
+	current_scene.set_difficulty_level(difficulty_level)
 	
 	current_scene.connect("changed_volume", self, "_on_MainMenu_changed_volume")
 	current_scene.connect("selected_difficulty_level", self, "_on_MainMenu_selected_difficulty_level")
@@ -177,12 +178,8 @@ func _on_Scores_exit_pressed() -> void:
 	switch_to_main_menu()
 
 
-func _on_Game_score_changed(value: int) -> void:
-	if value <= Bucket.FULL + 10:
-		get_audio_player().play_sound(PLOP_EFFECT)
-		return
-	
-	get_audio_player().play_sound(SPLOSH_EFFECT)
+func _on_Game_score_changed(_value: int) -> void:
+	get_audio_player().play_sound(PLOP_EFFECT)
 
 
 func _on_Game_dead() -> void:
