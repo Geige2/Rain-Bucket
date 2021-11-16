@@ -37,7 +37,13 @@ margin_bottom = 177.0
 margin_right = 310.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 310, 150 )
-text = "	This game uses Godot Engine, available under the following license:
+text = "Made by Geige2 on GitHub
+
+
+Licences
+-----------------------------
+
+	This game uses Godot Engine, available under the following license:
 
     Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine contributors.
 

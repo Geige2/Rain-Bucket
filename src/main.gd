@@ -14,6 +14,7 @@ var high_scores = [[], [], [], []]
 var volume = 3.0 setget set_volume
 var audio_streams = []
 var vfx_enabled = true
+var has_played = false
 
 onready var current_scene = $MainMenu
 onready var music_cooldown = $MusicCooldown
@@ -25,6 +26,11 @@ func _ready() -> void:
 	play_background_noise()
 	current_scene.set_volume_slider(volume * 5)
 	current_scene.set_vfx_enabled(vfx_enabled)
+	
+	if not has_played:
+		current_scene.show_guide()
+	
+	has_played = true
 
 
 func _notification(what: int) -> void:
@@ -65,9 +71,12 @@ func load_game() -> void:
 	
 	scores.open(SCORES_PATH, File.READ)
 	var data = parse_json(scores.get_line())
+	
 	high_scores = data["high_scores"]
 	volume = data["volume"]
 	vfx_enabled = data["use_vfx"]
+	
+	has_played = true
 	scores.close()
 
 

@@ -10,6 +10,7 @@ signal vfx_pressed
 
 onready var volume_slider = $CenterContainer/Buttons/Settings/Volume
 onready var use_vfx_enabled = $CenterContainer/Buttons/Settings/Enabled
+onready var guide = $GuideElements
 
 
 func set_volume_slider(value: float) -> void:
@@ -18,6 +19,10 @@ func set_volume_slider(value: float) -> void:
 
 func set_vfx_enabled(value: bool) -> void:
 	use_vfx_enabled.pressed = value
+
+
+func show_guide() -> void:
+	guide.show()
 
 
 func _on_Volume_value_changed(value: float) -> void:
